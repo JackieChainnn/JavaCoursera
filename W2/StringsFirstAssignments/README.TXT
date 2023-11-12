@@ -31,5 +31,9 @@ PROJECT REQUIREMENTS:
                   Calling findSimpleGene with this string as the parameter. 
                   If a gene exists, then print the gene, otherwise print the empty string.
         
-
+    Part 2: Finding a Gene - Using the Simplified Algorithm Reorganized
+        1. findSimpleGene to have three parameters, one for the DNA string,
+            one for the start codon and one for the stop codon.
+        2. findSimpleGene method with DNA strings as parameter with all uppercase letters or all lowercase letters,
+            and corresponding format in return value.
 

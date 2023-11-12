@@ -22,7 +22,7 @@ public class Part1 {
         if( (endGene - startGene + 1) % 3 != 0 ){
             return gene;
         }
-        gene = dna.substring(startGene, endGene);
+        gene = dna.substring(startGene, endGene + 1);
         return gene;
     }
     
@@ -40,7 +40,7 @@ public class Part1 {
         // String dna = "CATGGGACATAGTTAA";
         
         // and DNA with ATG, TAA and the substring ISN'T a gene
-        String dna = "CATGGGAATAGTTAAG";
+        String dna = "CATGGGATATAGTTAAG";
         String gene = findSimpleGene(dna);
         if(gene == ""){
             System.out.println(dna + " doesn't contain gene");
