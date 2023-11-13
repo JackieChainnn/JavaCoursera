@@ -36,4 +36,22 @@ PROJECT REQUIREMENTS:
             one for the start codon and one for the stop codon.
         2. findSimpleGene method with DNA strings as parameter with all uppercase letters or all lowercase letters,
             and corresponding format in return value.
-
+            
+    Part 3: Problem Solving with Strings
+        1. twoOccurrences(String stringa, String stringb):
+            This method returns true if stringa appears at least twice in stringb,
+            otherwise it returns false.
+        2.  void testing():
+            call twoOccurrences on several pairs of strings
+            and print the strings and the result.
+        3. lastPart(String stringa, String stringb):
+            This method finds the first occurrence of stringa in stringb,
+            and returns the part of stringb that follows stringa.
+            If stringa does not occur in stringb, then return stringb.
+            EX: lastPart(“an”, “banana”) => “ana”, the part of the string after the first “an”.
+                lastPart(“zoo”, “forest”) => “forest” since “zoo” does not appear in that word.
+        4. In testing() call the method lastPart with several pairs of strings.
+            For each call print the strings passed in and the result. 
+            For example, the output for the two calls above might be:
+                "The part of the string after an in banana is ana."
+                "The part of the string after zoo in forest is forest."
