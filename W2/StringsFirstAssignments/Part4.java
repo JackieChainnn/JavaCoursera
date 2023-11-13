@@ -13,12 +13,12 @@ public class Part4 {
         
         // Using words() get this url
         // href="http://www.youtube.com/watch?v=oPRfDC8kTqM">
-        for(String word : url.words()){
-            int youtubeIndex = word.indexOf("youtube.com");
+        for(String word : url.words()){         
+            int youtubeIndex = word.toLowerCase().indexOf("youtube.com");
              if(youtubeIndex != -1){
-                int startUrl = word.indexOf("\"");
+                int startUrl = word.lastIndexOf("\"", youtubeIndex);
                 int endUrl = word.indexOf("\"", startUrl + 1);
-                String youtubeUrl = word.substring(startUrl, endUrl + 1);
+                String youtubeUrl = word.substring(startUrl + 1, endUrl);
                 System.out.println(youtubeUrl);
             } 
         }
