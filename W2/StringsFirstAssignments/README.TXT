@@ -55,3 +55,15 @@ PROJECT REQUIREMENTS:
             For example, the output for the two calls above might be:
                 "The part of the string after an in banana is ana."
                 "The part of the string after zoo in forest is forest."
+                
+    Part 4: Finding Web Links
+        Write a program that reads the lines from the file at this URL location:
+        [http://www.dukelearntoprogram.com/course2/data/manylinks.html]
+        and prints each URL on the page that is a link to [youtube.com].
+            1. Use URLResource to read the file at [http://www.dukelearntoprogram.com/course2/data/manylinks.html] word by word.
+            2. For each word, check to see if “youtube.com” is in it. 
+                If it is, find the double quote to the left and right of the occurrence of “youtube.com” to identify the beginning and end of the URL. 
+            some Methods: indexOf(x, num), lastIndexOf(s, num)
+            Caution:
+                Because YouTube links are case sensitive, you will need return the original string.
+
