@@ -7,32 +7,23 @@
 public class Part2 {
     public String findSimpleGene(String dna, String startCodon, String stopCodon){
         String gene = "";
-        
+
         int startGene = dna.toUpperCase().indexOf(startCodon.toUpperCase());
         if(startGene == -1)
             return gene;
-        
-        String nextCodon;
-        boolean isNextCodon = false;
-        int endGene = 0, nextCodonStartIndex = 0;
-        while(isNextCodon != true || nextCodonStartIndex < dna.length())
-        {
-            nextCodonStartIndex = nextCodonStartIndex + startGene + 3;
-            if(nextCodonStartIndex + 3 > dna.length())
-                nextCodon = dna.substring(nextCodonStartIndex);
+
+        int endGene = -2;  // not important, just reasonable condition for loop
+        while(endGene != -1){
+            endGene = dna.toUpperCase().indexOf(stopCodon.toUpperCase(), endGene + 1);
+            if(endGene == -1)
+                return gene;
             else{
-                nextCodon = dna.substring(nextCodonStartIndex, nextCodonStartIndex + 3);    
-            }
-            
-            isNextCodon = nextCodon.toUpperCase().equals(stopCodon.toUpperCase());
-            if(isNextCodon) // nextCodon is end of gene
-            {
-                endGene = nextCodonStartIndex + 2;
-                break;
+                if( (endGene - startGene) % 3 == 0 ){
+                    gene = dna.substring(startGene, endGene + 3);
+                    return gene;
+                }
             }
         }
-                    
-        gene = dna.substring(startGene, endGene + 1);
         return gene;
     }
     
@@ -50,7 +41,11 @@ public class Part2 {
         // String dna = "CATGGGACATAGTTAA";
         
         // and DNA with ATG, TAA and the substring ISN'T a gene
-        String dna = "ATGATCGCTAATAATTAA";
+        // String dna = "ATGATCGCTAAGTA";
+        
+        // special gene
+        String dna = "CCATGCGCTTAATGATAGATTAA";
+        // v v v v v v01234567890123456789023
         String startCodon = "ATG";
         String stopCodon = "TAA";
         String gene = findSimpleGene(dna, startCodon, stopCodon);
