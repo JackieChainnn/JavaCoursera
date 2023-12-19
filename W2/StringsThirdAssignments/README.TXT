@@ -35,3 +35,22 @@ For example, (float) 9/2 is interpreted by Java as 9.0/2 and if one of the numbe
 a decimal number. Thus (float) 9/2 is 4.5.
 
 Write a method countCTG that has one String parameter dna, and returns the number of times the codon CTG appears in dna.
+
+Part 3 
+Write the void method processGenes that has one parameter sr, which is a StorageResource of strings. This method processes all the strings in sr
+to find out information about them. Specifically, it should: 
+
+    print all the Strings in sr that are longer than 9 characters
+
+    print the number of Strings in sr that are longer than 9 characters
+
+    print the Strings in sr whose C-G-ratio is higher than 0.35
+
+    print the number of strings in sr whose C-G-ratio is higher than 0.35
+
+    print the length of the longest gene in sr
+
+We have some real DNA for you to test your code on. Download the file brca1line.fa from the DukeLearnToProgram Project Resources page. Make sure you
+ save it in your BlueJ project so that your code can access it. You can use a FileResource to open the file and the FileResource method asString to 
+ convert the contents of the file to a single string so that you can use it like the other DNA strings you have been using
+    

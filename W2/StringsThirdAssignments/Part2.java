@@ -6,7 +6,7 @@
  * @version (a version number or a date)
  */
 public class Part2 {
-    public float cgRatio(String dna){
+    public static float cgRatio(String dna){
         int count = 0;
         for(int i = 0; i < dna.length(); i++){
             if(dna.charAt(i) == 'C' || dna.charAt(i) == 'G')
