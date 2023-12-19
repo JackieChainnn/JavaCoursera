@@ -8,6 +8,9 @@
 import edu.duke.*;
 
 public class Part1 {
+    public Part1(){
+    }
+    
     public int findStopCodon(String dnaStr,
                              int startIdx,
                              String stopCodon){
