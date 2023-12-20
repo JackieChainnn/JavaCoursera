@@ -35,10 +35,54 @@ public class Parser {
         return result;
     }
     
+    public void countryExportItems(CSVParser parser, String item1, String item2){
+        String result = "";
+        for(CSVRecord csvRecord : parser){
+            if(csvRecord.get("Exports").contains(item1) && csvRecord.get("Exports").contains(item2)){
+                // Get the iterator
+                Iterator<String> it = csvRecord.iterator();
+                while(it.hasNext()) {
+                    result += it.next() + ": ";
+                } 
+                System.out.println(result);
+                result = "";
+            }
+        }
+    }
+    
+    public int howMany(CSVParser parser, String item){
+        int counter = 0;
+        for(CSVRecord csvRecord : parser){
+            if(csvRecord.get("Exports").contains(item)){
+                counter++;               
+            }
+        }
+        return counter;
+    }
+    
+        public void secondEco(CSVParser parser){
+        String value = "$999,999,999,999";
+        String result = "";
+        for(CSVRecord csvRecord : parser){
+            if(csvRecord.get("Value (dollars)").length() > value.length()){
+                // Get the iterator
+                Iterator<String> it = csvRecord.iterator();
+                while(it.hasNext()) {
+                    result += it.next() + ": ";
+                }
+                System.out.println(result);
+                result = "";
+            }
+        }
+    }
+    
     public void tester(){
         FileResource fr = new FileResource();
         CSVParser parser = fr.getCSVParser();
-        String result = countryInfo(parser, "United States");
+        // String result = countryInfo(parser, "Nauru");
+        // countryExportItems(parser, "gold", "diamonds");
+        int result = howMany(parser, "sugar");
+        // secondEco(parser);
         System.out.println(result);
     }
 }
