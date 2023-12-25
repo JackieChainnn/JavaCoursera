@@ -36,6 +36,7 @@ public class Parser {
     }
     
     public void countryExportItems(CSVParser parser, String item1, String item2){
+        System.out.println("contries export " + item1 + " & " + item2);
         String result = "";
         for(CSVRecord csvRecord : parser){
             if(csvRecord.get("Exports").contains(item1) && csvRecord.get("Exports").contains(item2)){
@@ -80,9 +81,9 @@ public class Parser {
         FileResource fr = new FileResource();
         CSVParser parser = fr.getCSVParser();
         // String result = countryInfo(parser, "Nauru");
-        // countryExportItems(parser, "gold", "diamonds");
-        int result = howMany(parser, "sugar");
-        // secondEco(parser);
-        System.out.println(result);
+        // countryExportItems(parser, "cotton", "flowers");
+        // int result = howMany(parser, "cocoa");
+        secondEco(parser);
+        // System.out.println(result);
     }
 }

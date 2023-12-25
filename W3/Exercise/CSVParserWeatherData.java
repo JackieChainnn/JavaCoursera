@@ -14,7 +14,7 @@ public class CSVParserWeatherData {
         CSVRecord coldestSoFar = null;
         for(CSVRecord csvRecord : parser){
             Double currentTemp = Double.parseDouble(csvRecord.get("TemperatureF"));
-            if(coldestSoFar == null || currentTemp < Double.parseDouble(coldestSoFar.get("TemperatureF"))){
+            if((coldestSoFar == null || currentTemp < Double.parseDouble(coldestSoFar.get("TemperatureF")) && currentTemp != -9999)){
                 coldestSoFar = csvRecord;
             }
         }
@@ -30,7 +30,7 @@ public class CSVParserWeatherData {
             CSVParser parser = fr.getCSVParser();
             CSVRecord current = coldestHourInFile(parser);
             Double currentTemp = Double.parseDouble(current.get("TemperatureF"));
-            if(coldestTemp == null || currentTemp < coldestTemp){
+            if(coldestTemp == null || currentTemp < coldestTemp && currentTemp != -9999){
                 coldestTemp = currentTemp;
                 result = file.getPath();
             }
