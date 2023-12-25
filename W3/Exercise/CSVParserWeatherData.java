@@ -73,6 +73,55 @@ public class CSVParserWeatherData {
         return lowestHumidityRecord;
     }
     
+    public double averageTemperatureInFile(CSVParser parser){
+        double totalTemp = 0;
+        int recordNum = 0;
+        for(CSVRecord csvRecord : parser){
+            try{
+                double currentTemp = Double.parseDouble(csvRecord.get("TemperatureF"));
+                recordNum++;
+                totalTemp += currentTemp;
+            }catch(NumberFormatException e){
+                System.out.println("Invalid input at " + csvRecord.getRecordNumber());
+            }
+        }
+        return totalTemp/recordNum;
+    }
+    
+    public double averageTemperatureWithHighHumidityInFile(CSVParser parser, int value){
+        double totalTemp = 0;
+        int recordNum = 0;
+        for(CSVRecord csvRecord : parser){
+            try{
+                int currentHumidity = Integer.parseInt(csvRecord.get("Humidity"));
+                if(currentHumidity >= value){
+                    totalTemp += Double.parseDouble(csvRecord.get("TemperatureF"));
+                    recordNum++;
+                }
+            }catch(NumberFormatException e){
+                System.out.println("Invalid input at " + csvRecord.getRecordNumber());
+            }
+        }
+        return totalTemp/recordNum;
+    }
+    
+    public void testAverageTemperatureWithHighHumidityInFile(){
+        FileResource fr = new FileResource();
+        CSVParser parser = fr.getCSVParser();
+        double result = averageTemperatureWithHighHumidityInFile(parser, 80);
+        if(result != result)
+            System.out.println("No temperatures with that humidity");
+        else
+            System.out.println("Average Temp when high Humidity is " + result);
+    }
+    
+    public void testAverageTemperatureInFile(){
+        FileResource fr = new FileResource();
+        CSVParser parser = fr.getCSVParser();
+        double avgTemp = averageTemperatureInFile(parser);
+        System.out.println("Average temperature in file is " + avgTemp);
+    }
+    
     public void testLowestHumidityInManyFiles(){
         CSVRecord csv = lowestHumidityInManyFiles();
         System.out.println("Lowest Humidity was " + csv.get("Humidity") + " at " + csv.get("DateUTC"));
