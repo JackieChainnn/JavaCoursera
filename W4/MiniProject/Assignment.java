@@ -7,6 +7,7 @@
  */
 import edu.duke.*;
 import org.apache.commons.csv.*;
+import java.io.File;
 
 public class Assignment {
     public void totalBirth(FileResource fr){
@@ -24,6 +25,35 @@ public class Assignment {
         System.out.println("Total births: " + totalBirths);
         System.out.println("Girl names: " + girls);
         System.out.println("Boy names: " + boys);
+    }
+    
+    public int getRank(int year, String name, String gender){
+        String fileName = "yob" + year + ".csv";
+        String filePath = "us_babynames/us_babynames_by_year/"+fileName;
+        int rank = -1;
+        int girls = 0;
+        
+        System.out.println("Rank seeking for " + name + " from " + filePath);
+        FileResource fr = new FileResource(filePath);
+        CSVParser parser = fr.getCSVParser(false);
+        for(CSVRecord csvRecord : parser){
+            if(csvRecord.get(1).equals("F"))
+                girls++;
+            String currentName = csvRecord.get(0).toUpperCase();
+            String currentGender = csvRecord.get(1).toUpperCase();
+            if( currentName.equals(name.toUpperCase()) && currentGender.equals(gender.toUpperCase())){
+                rank = (int)csvRecord.getRecordNumber();
+                if(gender.equals("M"))
+                    return rank-girls;
+                return rank;
+            }
+        }
+        return rank;
+    }
+    
+    public void testGetRank(){
+        int rank = getRank(2012, "Mason", "M");
+        System.out.println("Rank: " + rank);
     }
     
     public void test(){
