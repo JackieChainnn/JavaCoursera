@@ -14,3 +14,7 @@ You will write a program with several methods and tester methods to test each me
     - getName that has three parameters: an integer named year, an integer named rank, and a string named gender (F for female and M for male).
         This method returns the name of the person in the file at this rank, for the given gender, where rank 1 is the name with the largest 
         number of births. If the rank does not exist in the file, then “NO NAME”  is returned.
+    -  whatIsNameInYear has four parameters: String name, int year (the year that name was born),  int newYear, String gender. 
+        This method determines what name would have been named if they were born in a different year, based on the same popularity. That is, 
+        you should determine the rank of name in the year they were born, and then print the name born in newYear that is at the same rank and 
+        same gender. For example, If Isabella was born in 2014 instead, she would have been named Sophia, the third most popular girl's name that year

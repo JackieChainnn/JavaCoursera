@@ -79,6 +79,20 @@ public class Assignment {
         return name;
     }
     
+    public void whatIsNameInYear(String name, int year,  int newYear, String gender){
+        int rankInYear = getRank(year, name, gender);
+        String nameInNewYear = getName(newYear, rankInYear, gender);
+        String pronoun = "she";
+        if(rankInYear!= -1 && nameInNewYear != "NO NAME"){
+            if(gender.equals("M"))
+                pronoun = "he";
+            System.out.println(name + " born in "+year+" would be "+nameInNewYear+" if "+pronoun+" was born in "+newYear+".");   
+        }else{
+            System.out.println("unavailable");
+        }
+    }
+    
+    
     public void testGetName(){
         String name = getName(2012, 232323, "M");
         System.out.println("Name: " + name);
