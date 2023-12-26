@@ -51,6 +51,39 @@ public class Assignment {
         return rank;
     }
     
+    public String getName(int year, int rank, String gender){
+        int girlRank = 0, currentRank = 0;
+        String name = "NO NAME";
+        String fileName = "yob" + year + ".csv";
+        String filePath = "us_babynames/us_babynames_by_year/"+fileName;
+        
+        System.out.println("Name seeking by rank on " + rank + "\'th from " + filePath);
+        FileResource fr = new FileResource(filePath);
+        CSVParser parser = fr.getCSVParser(false);
+        for(CSVRecord csvRecord : parser){
+            currentRank = (int)csvRecord.getRecordNumber();
+            if(csvRecord.get(1).equals("M"))
+            {
+                if( (currentRank == (rank + girlRank)) && (csvRecord.get(1).equals(gender)) ){
+                    name = csvRecord.get(0);
+                    return name;
+                }
+            }else{
+                girlRank++;
+                if( currentRank == rank && csvRecord.get(1).equals(gender) ){
+                    name = csvRecord.get(0);
+                    return name;
+                }
+            }            
+        }
+        return name;
+    }
+    
+    public void testGetName(){
+        String name = getName(2012, 232323, "M");
+        System.out.println("Name: " + name);
+    }
+    
     public void testGetRank(){
         int rank = getRank(2012, "Mason", "M");
         System.out.println("Rank: " + rank);
