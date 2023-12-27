@@ -24,3 +24,10 @@ You will write a program with several methods and tester methods to test each me
         name and gender are not in any of the selected files, it should return -1. For example, calling yearOfHighestRank with name Mason and 
         gender ‘M’ and selecting the three test files above results in returning the year 2012. That is because Mason was ranked the  2nd most
         popular name in 2012, ranked 4th in 2013 and ranked 3rd in 2014. His highest ranking was in 2012.
+    - getAverageRank has two parameters: String name, String gender. 
+        This method selects a range of files to process
+        returns double average rank of the name and gender over the selected files. Return -1.0 if the name is not ranked in any of the selected
+        files.
+        For example getAverageRank("Mason", ‘M’) and selecting the three test files results in returning 3.0, as he is rank 2 in the year 2012, 
+        rank 4 in 2013 and rank 3 in 2014.  As another example, calling   getAverageRank("Jacob", ‘M’) and selecting the three test files above 
+        results in returning 2.66.

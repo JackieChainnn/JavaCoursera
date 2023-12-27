@@ -64,7 +64,8 @@ public class Assignment {
             currentRank = (int)csvRecord.getRecordNumber();
             if(csvRecord.get(1).equals("M"))
             {
-                if( (currentRank == (rank + girlRank)) && (csvRecord.get(1).equals(gender)) ){
+                currentRank = currentRank - girlRank;
+                if( currentRank == rank && (csvRecord.get(1).equals(gender)) ){
                     name = csvRecord.get(0);
                     return name;
                 }
@@ -101,7 +102,7 @@ public class Assignment {
         for(File file : dr.selectedFiles()){
             int girl = 0;
             FileResource fr = new FileResource(file);
-            CSVParser parser = fr.getCSVParser();
+            CSVParser parser = fr.getCSVParser(false);
             for(CSVRecord csvRecord : parser){
                 String currentName = csvRecord.get(0).toUpperCase();
                 int currentRank = (int)csvRecord.getRecordNumber();     
@@ -133,11 +134,48 @@ public class Assignment {
         return yearOfHighestRank;
     }
     
+    public double getAverageRank(String name, String gender){
+        System.out.println("Calculating avg rank for: " + name + " with gender: " + gender);
+        double avgRank = -1;
+        int fileNum = 0, totalRank = 0;
+        DirectoryResource dr = new DirectoryResource();
+        for(File file : dr.selectedFiles()){
+            int girl = 0;
+            fileNum++;
+            FileResource fr = new FileResource(file);
+            CSVParser parser = fr.getCSVParser(false);
+            for(CSVRecord csvRecord : parser){
+                String cName = csvRecord.get(0).toUpperCase();
+                String cGend = csvRecord.get(1);
+                int cRank = (int)csvRecord.getRecordNumber();     
+                if(cGend.equals("F")){
+                    girl++;
+                }
+                
+                if( cName.equals(name.toUpperCase()) && cGend.equals(gender)){
+                    if(csvRecord.get(1).equals("M")){
+                        cRank = cRank-girl;
+                        totalRank += cRank;
+                    }else{
+                        totalRank += cRank;
+                    }
+                }
+            }
+        }
+        if(totalRank > 0)
+            avgRank = (double)totalRank/fileNum;        
+        return avgRank;
+    }
+    
+    public void testGetAverageRank(){
+        double avgRank = getAverageRank("Jacob", "M");
+        System.out.println("Avg rank: " + avgRank);
+    }
+    
     public void testYearOfHighestRank(){
         int year = yearOfHighestRank("Mason", "M");
         System.out.println("Response: " + year);
     }
-    
     
     public void testGetName(){
         String name = getName(2012, 232323, "M");
