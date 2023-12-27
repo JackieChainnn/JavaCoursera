@@ -92,6 +92,52 @@ public class Assignment {
         }
     }
     
+    public int yearOfHighestRank(String name, String gender){  
+        System.out.println("Checking year of highest rank for: " + name + " with gender: " + gender);
+        int highestRank = -1;
+        String fileName = null;
+        int yearOfHighestRank = -1;
+        DirectoryResource dr = new DirectoryResource();
+        for(File file : dr.selectedFiles()){
+            int girl = 0;
+            FileResource fr = new FileResource(file);
+            CSVParser parser = fr.getCSVParser();
+            for(CSVRecord csvRecord : parser){
+                String currentName = csvRecord.get(0).toUpperCase();
+                int currentRank = (int)csvRecord.getRecordNumber();     
+                String currentGender = csvRecord.get(1);
+                if(currentGender.equals("F"))
+                    girl++;
+                    
+                if( currentName.equals(name.toUpperCase()) && currentGender.equals(gender)){
+                    if(csvRecord.get(1).equals("M")){
+                        currentRank = currentRank-girl;
+                        if(highestRank == -1 || currentRank < highestRank){
+                            highestRank = currentRank;
+                            fileName = file.getName();
+                        }
+                    }else{
+                        if(highestRank == -1 || currentRank < highestRank){
+                            highestRank = currentRank;
+                            fileName = file.getName();
+                        }
+                    }
+                }
+            }
+        }
+        
+        //get the yearOfHighestRank integer from the name of the file
+        if(fileName != null)
+            yearOfHighestRank = Integer.parseInt(fileName.replaceAll("[\\D]", ""));
+            
+        return yearOfHighestRank;
+    }
+    
+    public void testYearOfHighestRank(){
+        int year = yearOfHighestRank("Mason", "M");
+        System.out.println("Response: " + year);
+    }
+    
     
     public void testGetName(){
         String name = getName(2012, 232323, "M");
