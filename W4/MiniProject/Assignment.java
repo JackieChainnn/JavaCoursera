@@ -11,20 +11,18 @@ import java.io.File;
 
 public class Assignment {
     public void totalBirth(FileResource fr){
-        int totalBirths ,girls , boys, num;
-        totalBirths = girls = boys = 0;
+        int girlName, boyName;
+        girlName = boyName = 0;
         CSVParser parser = fr.getCSVParser(false);
         for(CSVRecord csvRecord : parser){
-            num = Integer.parseInt(csvRecord.get(2));
-            totalBirths += num;
             if(csvRecord.get(1).equals("F"))
-                girls += num;
-            else if(csvRecord.get(1).equals("M"))
-                boys += num;
+                girlName++;
+            else
+                boyName++;
         }
-        System.out.println("Total births: " + totalBirths);
-        System.out.println("Girl names: " + girls);
-        System.out.println("Boy names: " + boys);
+        System.out.println("Total names in file = " + (girlName + boyName));
+        System.out.println("Girl names: " + girlName);
+        System.out.println("Boy names: " + boyName);
     }
     
     public int getRank(int year, String name, String gender){
@@ -167,13 +165,42 @@ public class Assignment {
         return avgRank;
     }
     
+    public int getTotalBirthsRankedHigher(int year, String name, String gender){
+        int girl = 0;
+        int boy = 0;
+        String fileName = "yob" + year + ".csv";
+        String filePath = "us_babynames/us_babynames_by_year/"+fileName;
+        System.out.println("Checking for " + name + " from " + filePath);
+        
+        FileResource fr = new FileResource(filePath);
+        CSVParser parser = fr.getCSVParser(false);
+        for(CSVRecord csvRecord : parser){
+            String cName = csvRecord.get(0);
+            String cGender = csvRecord.get(1);
+            int cNum = Integer.parseInt(csvRecord.get(2));
+            if(cName.equals(name) && cGender.equals(gender)){
+                if(cGender.equals("F"))
+                    return girl;
+                else
+                    return boy;
+            }else{
+                if(cGender.equals("F"))
+                    girl += cNum;
+                else
+                    boy += cNum;
+            }
+        }
+        return -1;
+    }
+    
+    
     public void testGetAverageRank(){
         double avgRank = getAverageRank("Jacob", "M");
         System.out.println("Avg rank: " + avgRank);
     }
     
     public void testYearOfHighestRank(){
-        int year = yearOfHighestRank("Mason", "M");
+        int year = yearOfHighestRank("Genevieve", "F");
         System.out.println("Response: " + year);
     }
     
@@ -183,11 +210,11 @@ public class Assignment {
     }
     
     public void testGetRank(){
-        int rank = getRank(2012, "Mason", "M");
+        int rank = getRank(1960, "Emily", "F");
         System.out.println("Rank: " + rank);
     }
     
-    public void test(){
+    public void testTotalBirth(){
         FileResource fr = new FileResource();
         totalBirth(fr);
     }
