@@ -31,3 +31,8 @@ You will write a program with several methods and tester methods to test each me
         For example getAverageRank("Mason", ‘M’) and selecting the three test files results in returning 3.0, as he is rank 2 in the year 2012, 
         rank 4 in 2013 and rank 3 in 2014.  As another example, calling   getAverageRank("Jacob", ‘M’) and selecting the three test files above 
         results in returning 2.66.
+    - getTotalBirthsRankedHigher has three parameters: int year, String name, String gender.
+        returns an integer, the total number of births of those names with the same gender and same year who are ranked higher than name. 
+        For example, if getTotalBirthsRankedHigher accesses the "yob2012short.csv" file with name set to “Ethan”, gender set to “M”, and year set
+        to 2012, then this method should return 15, since Jacob has 8 births and Mason has 7 births, and those are the only two ranked higher than
+        Ethan. 
